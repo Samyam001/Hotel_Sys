@@ -1,0 +1,37 @@
+.page-content {
+    padding-top: 100px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    min-height: 100vh;
+}
+
+.center {
+    text-align: center;
+}
+
+.page-header {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.page-header .title {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    font-weight: 300;
+}
+
+.page-header .subtitle {
+    letter-spacing: 1px;
+    font-size: 1rem;
+    color: var(--text-muted);
+}
+
+.about-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+}
