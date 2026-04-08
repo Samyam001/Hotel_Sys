@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel EAD</title>
+    <meta name="description" content="Experience the premium luxury at Hotel EAD. Discover the architecture of silence.">
+    <!-- Use Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+    <header class="navbar" id="main-nav">
+        <div class="logo">HOTEL EAD</div>
+        <nav class="nav-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="room.html">Rooms</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact Us</a>
+        </nav>
+        <div class="nav-actions">
+            <a href="rooms.html" class="btn btn-primary" id="btn-book-nav">BOOK NOW</a>
+        </div>
+    </header>
+
+    <main class="hero" id="home-hero">
+        <div class="hero-content">
+            <span class="subtitle">WHERE STILLNESS RESIDES</span>
+            <h1 class="title">Welcome to<br>Hotel EAD</h1>
+        </div>
+
+        <div class="booking-widget" id="main-booking-widget">
+            <div class="widget-field">
+                <label for="check-in">Check In</label>
+                <input type="text" id="check-in">
+            </div>
+            <div class="divider"></div>
+            <div class="widget-field">
+                <label for="check-out">Check Out</label>
+                <input type="text" id="check-out">
+            </div>
+            <div class="divider"></div>
+            <div class="widget-field">
+                <label for="guests">GUESTS</label>
+                <input type="text" id="guests">
+            </div>
+            <div class="widget-action">
+                <button class="btn btn-primary btn-large" id="btn-search-availability">Search Availability</button>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
