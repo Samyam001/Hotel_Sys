@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Management | Hotel EAD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/forms.css">
+</head>
+<body>
+    <header class="navbar" id="main-nav">
+        <div class="logo">HOTEL EAD</div>
+        <nav class="nav-links">
+            <a href="room-status.html">Dashboard</a>
+            <a href="checkout.html">Check-Out</a>
+            <a href="room-management.html" class="active">Manage Rooms</a>
+        </nav>
+        <div class="nav-actions">
+            <a href="index.html" class="btn btn-outline" style="border: 1px solid white; color: white;">LOGOUT</a>
+        </div>
+    </header>
+
+    <main class="page-content" style="padding-top: 100px; padding-bottom: 50px;">
+        <div class="form-container form-full-width">
+            <div class="form-header">
+                <span class="subtitle" style="display: block; font-family: var(--font-body); font-size: 0.85rem; letter-spacing: 4px; text-transform: uppercase;">Administration</span>
+                <h2>Room Management</h2>
+            </div>
+
+            <form id="roomForm" novalidate>
+                <div class="form-row">
+                    <div class="form-group form-col">
+                        <label for="roomNumber">Room Number *</label>
+                        <input type="text" id="roomNumber" class="form-control" placeholder="e.g. 101" required>
+                        <span class="error-msg" id="e-roomNumber">Room number is required.</span>
+                    </div>
+
+                    <div class="form-group form-col">
+                        <label for="roomType">Room Type *</label>
+                        <select id="roomType" class="form-control" required>
+                            <option value="">Select Type</option>
+                            <option value="Standard">Standard</option>
+                            <option value="Deluxe">Deluxe</option>
+                            <option value="Premium">Premium</option>
+                            <option value="Suite">Suite</option>
+                        </select>
+                        <span class="error-msg" id="e-roomType">Room type is required.</span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group form-col">
+                        <label for="price">Price (Per Night) *</label>
+                        <input type="number" id="price" class="form-control" placeholder="$ 0.00" min="0" required>
+                        <span class="error-msg" id="e-price">Valid price is required.</span>
+                    </div>
+
+                    <div class="form-group form-col">
+                        <label for="status">Current Status *</label>
+                        <select id="status" class="form-control" required>
+                            <option value="Available">Available</option>
+                            <option value="Maintenance">Maintenance</option>
+                            <option value="Cleaning">Cleaning</option>
+                        </select>
+                        <span class="error-msg" id="e-status">Status is required.</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Amenities / Description</label>
+                    <textarea id="description" class="form-control" placeholder="Describe the room features..."></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" style="border: 1px solid white; color: white;" onclick="document.getElementById('roomForm').reset();">Clear Fields</button>
+                    <button type="submit" class="btn btn-primary">Save Room Details</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('roomForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const fields = ['roomNumber', 'roomType', 'price', 'status'];
+            let isValid = true;
+
+            fields.forEach(f => {
+                const el = document.getElementById(f);
+                const err = document.getElementById('e-' + f);
+                
+                el.classList.remove('is-invalid');
+                err.style.display = 'none';
+                
+                if (!el.value) {
+                    el.classList.add('is-invalid');
+                    err.style.display = 'block';
+                    isValid = false;
+                }
+                
+                if (f === 'price' && el.value < 0) {
+                    el.classList.add('is-invalid');
+                    err.textContent = "Price cannot be negative.";
+                    err.style.display = 'block';
+                    isValid = false;
+                }
+            });
+
+            if (isValid) {
+                // Save to localStorage
+                let rooms = JSON.parse(localStorage.getItem('hotel_rooms')) || [];
+                const newRoom = {
+                    number: document.getElementById('roomNumber').value,
+                    type: document.getElementById('roomType').value,
+                    price: document.getElementById('price').value,
+                    status: document.getElementById('status').value,
+                    guest: '--',
+                    checkIn: '--',
+                    checkOut: '--'
+                };
+                
+                // Check if room number exists
+                const existingIndex = rooms.findIndex(r => r.number === newRoom.number);
+                if(existingIndex >= 0) rooms[existingIndex] = newRoom;
+                else rooms.push(newRoom);
+                
+                localStorage.setItem('hotel_rooms', JSON.stringify(rooms));
+
+                const btn = document.querySelector('button[type="submit"]');
+                const orig = btn.textContent;
+                btn.textContent = "Saving...";
+                btn.disabled = true;
+                
+                setTimeout(() => {
+                    alert("Room added/updated successfully. You can view it in the Dashboard.");
+                    btn.textContent = orig;
+                    btn.disabled = false;
+                    document.getElementById('roomForm').reset();
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>

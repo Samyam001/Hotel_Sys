@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation | Hotel EAD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body style="background-color: #f4f4f5; color: #1f2937;">
+    <header class="navbar" id="main-nav" style="background-color: #0b0f19;">
+        <div class="logo" style="color: white;">HOTEL EAD</div>
+        <nav class="nav-links">
+            <a href="index.html" style="color: rgba(255,255,255,0.7);">Home</a>
+            <a href="guest.html" style="color: rgba(255,255,255,0.7);">New Booking</a>
+        </nav>
+    </header>
+
+    <main class="page-content" style="padding-top: 100px; padding-bottom: 50px;">
+        <div style="text-align: center; margin-bottom: 1rem;">
+            <button class="btn btn-primary" onclick="window.print()">Print Document</button>
+            <button class="btn btn-outline" style="border: 1px solid #0b0f19; color: #0b0f19; margin-left: 1rem;" onclick="generatePDF()">Download PDF</button>
+        </div>
+
+        <div class="report-container" id="confirmationReport">
+            <div class="report-header">
+                <div class="brand-section">
+                    <h1>Booking Confirmation</h1>
+                    <div style="color: var(--primary-color); font-weight: 600; font-family: var(--font-body);">HOTEL EAD</div>
+                    <div style="font-size: 0.85rem; color: #6b7280; margin-top: 5px;">Thamel, Kathmandu, Nepal<br>reservations@hotelead.com | +977 1 4XXXXXX</div>
+                </div>
+                <div class="report-meta">
+                    <div style="font-size: 1.5rem; color: #111827; font-weight: 700; margin-bottom: 5px;">EAD-8842</div>
+                    <div>Reference ID</div>
+                    <div style="margin-top: 1rem; font-size: 0.85rem;">Date: <span id="currentDate"></span></div>
+                    <div>Status: <span class="badge badge-success">Confirmed</span></div>
+                </div>
+            </div>
+
+            <h3 style="margin-bottom: 1rem; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.5rem; font-weight: 600;">Guest Details</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; font-size: 0.9rem;">
+                <div><strong>Name:</strong> <span id="confName">John Doe</span></div>
+                <div><strong>Email:</strong> <span id="confEmail">john.doe@example.com</span></div>
+                <div><strong>Phone:</strong> <span id="confPhone">+977 9812345678</span></div>
+                <div><strong>Nationality:</strong> <span id="confNationality">Nepali</span></div>
+            </div>
+
+            <h3 style="margin-bottom: 1rem; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.5rem; font-weight: 600;">Stay Information</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Room Type</th>
+                        <th>Guests</th>
+                        <th>Check-In</th>
+                        <th>Check-Out</th>
+                        <th>Rate/Night</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong id="confRoom">Premium Room</strong></td>
+                        <td id="confGuests">2 Adults</td>
+                        <td id="confCheckin">Oct 15, 2026</td>
+                        <td id="confCheckout">Oct 18, 2026</td>
+                        <td>$ 150.00</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="background-color: #f9fafb; padding: 1.5rem; border-radius: 8px; margin-top: 2rem;">
+                <h4 style="margin-bottom: 1rem; font-weight: 600;">Important Notes:</h4>
+                <ul style="font-size: 0.85rem; color: #4b5563; padding-left: 1rem; line-height: 1.6;">
+                    <li>Check-in time is 14:00. Check-out time is 12:00 noon.</li>
+                    <li>Please present a valid ID or passport upon check-in.</li>
+                    <li>Any cancellation must be requested 48 hours prior to arrival to avoid penalty.</li>
+                </ul>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem; font-size: 0.8rem; color: #9ca3af;">
+                <p>Thank you for choosing Hotel EAD. We look forward to welcoming you.</p>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString();
+        
+        // Dynamically inject session data
+        if (sessionStorage.getItem('booking_fname')) {
+            document.getElementById('confName').textContent = sessionStorage.getItem('booking_fname') + ' ' + sessionStorage.getItem('booking_lname');
+            document.getElementById('confEmail').textContent = sessionStorage.getItem('booking_email');
+            document.getElementById('confPhone').textContent = sessionStorage.getItem('booking_phone');
+            document.getElementById('confRoom').textContent = sessionStorage.getItem('booking_room') || 'Premium Room';
+            document.getElementById('confGuests').textContent = sessionStorage.getItem('booking_guests') + ' Guests';
+            document.getElementById('confCheckin').textContent = sessionStorage.getItem('booking_checkin');
+            document.getElementById('confCheckout').textContent = sessionStorage.getItem('booking_checkout');
+        }
+
+        function generatePDF() {
+            var element = document.getElementById('confirmationReport');
+            var opt = {
+              margin:       1,
+              filename:     'Booking_Confirmation_EAD-8842.pdf',
+              image:        { type: 'jpeg', quality: 0.98 },
+              html2canvas:  { scale: 2 },
+              jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(element).save();
+        }
+    </script>
+</body>
+</html>
