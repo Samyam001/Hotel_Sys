@@ -24,8 +24,9 @@
             <a href="about.html">About Us</a>
             <a href="contact.html">Contact Us</a>
         </nav>
-        <div class="nav-actions">
-            <a href="Book.html" class="btn btn-primary" id="btn-book-nav">BOOK NOW</a>
+        <div class="nav-actions" style="display: flex; align-items: center;">
+            <a href="login.html" class="btn btn-outline" style="border: 1px solid white; color: white; margin-right: 1rem;">STAFF LOGIN</a>
+            <a href="room.html" class="btn btn-primary">BOOK NOW</a>
         </div>
     </header>
 
@@ -50,33 +51,33 @@
                 <div class="filter-section">
                     <h3>Room Type</h3>
                     <label class="checkbox-container">Standard Room
-                        <input type="checkbox" checked>
+                        <input type="checkbox" class="type-filter" value="Standard Room" checked>
                         <span class="checkmark"></span>
                     </label>
                     <label class="checkbox-container">Deluxe Room
-                        <input type="checkbox" checked>
+                        <input type="checkbox" class="type-filter" value="Deluxe Room" checked>
                         <span class="checkmark"></span>
                     </label>
                     <label class="checkbox-container">Premium Room
-                        <input type="checkbox" checked>
+                        <input type="checkbox" class="type-filter" value="Premium Room" checked>
                         <span class="checkmark"></span>
                     </label>
                     <label class="checkbox-container">Suite Room
-                        <input type="checkbox" checked>
+                        <input type="checkbox" class="type-filter" value="Suite Room" checked>
                         <span class="checkmark"></span>
                     </label>
                     <label class="checkbox-container">Heritage Suite
-                        <input type="checkbox" checked>
+                        <input type="checkbox" class="type-filter" value="Heritage Suite" checked>
                         <span class="checkmark"></span>
                     </label>
                 </div>
 
-                <button class="btn btn-outline" style="width: 100%; margin-top: 1rem;">Clear Filters</button>
+                <button class="btn btn-outline" id="btnClearFilters" style="width: 100%; margin-top: 1rem;">Clear Filters</button>
             </aside>
 
-            <section class="rooms-grid">
+            <section class="rooms-grid" id="roomsList">
                 <!-- Standard Room -->
-                <article class="room-card">
+                <article class="room-card" data-price="5000" data-type="Standard Room" onclick="openModal('Standard Room', '5000', 'Basic, budget-friendly rooms, typically 15-18 sqm space featuring modern AC and basic attached bathrooms.', 'assets/room_standard.png')">
                     <div class="room-img" style="background-image: url('assets/room_standard.png')"></div>
                     <div class="room-info">
                         <div class="room-title-row">
@@ -89,7 +90,7 @@
                 </article>
 
                 <!-- Deluxe Room -->
-                <article class="room-card">
+                <article class="room-card" data-price="10000" data-type="Deluxe Room" onclick="openModal('Deluxe Room', '10000', 'Upgraded, more spacious rooms (18-25 sqm) featuring comfortable king/twin beds, and in-room amenities like a TV and work desk.', 'assets/room_standard.png')">
                     <div class="room-img" style="background-image: url('assets/room_standard.png')"></div>
                     <div class="room-info">
                         <div class="room-title-row">
@@ -102,7 +103,7 @@
                 </article>
 
                 <!-- Premium Room -->
-                <article class="room-card">
+                <article class="room-card" data-price="15000" data-type="Premium Room" onclick="openModal('Premium Room', '15000', 'Larger rooms (25-35 sqm) commonly featuring a seating area, minibar, balcony, and improved picturesque views.', 'assets/room_standard.png')">
                     <div class="room-img" style="background-image: url('assets/room_standard.png')"></div>
                     <div class="room-info">
                         <div class="room-title-row">
@@ -115,7 +116,7 @@
                 </article>
 
                 <!-- Suite Room -->
-                <article class="room-card">
+                <article class="room-card" data-price="30000" data-type="Suite Room" onclick="openModal('Suite Room', '30000', 'Spacious (40-60 sqm) with a separate living room and superior amenities, including a premium soaking bathtub.', 'assets/room_heritage.png')">
                     <div class="room-img" style="background-image: url('assets/room_heritage.png')"></div>
                     <div class="room-info">
                         <div class="room-title-row">
@@ -128,7 +129,7 @@
                 </article>
 
                 <!-- Heritage Suite -->
-                <article class="room-card">
+                <article class="room-card" data-price="50000" data-type="Heritage Suite" onclick="openModal('Heritage Suite', '50000', 'Found exclusively in boutique styling, beautifully designed with traditional, local, or artistic decor.', 'assets/room_heritage.png')">
                     <div class="room-img" style="background-image: url('assets/room_heritage.png')"></div>
                     <div class="room-info">
                         <div class="room-title-row">
@@ -141,7 +142,23 @@
                 </article>
             </section>
         </div>
+
+        <!-- Room Details Modal -->
+        <div id="roomModal" class="modal" style="display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px); justify-content: center; align-items: center;">
+            <div class="modal-content" style="background-color: #0b0f19; border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; width: 90%; max-width: 600px; padding: 2rem; position: relative;">
+                <span class="close" onclick="closeModal()" style="position: absolute; right: 1.5rem; top: 1rem; color: #fff; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
+                <img id="modalImg" src="" style="width: 100%; height: 250px; object-fit: cover; border-radius: 8px; margin-bottom: 1.5rem;">
+                <h2 id="modalTitle" style="font-family: var(--font-heading); margin-bottom: 0.5rem;"></h2>
+                <div id="modalPrice" style="color: var(--primary-color); font-weight: bold; margin-bottom: 1rem; font-size: 1.25rem;"></div>
+                <p id="modalDesc" style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 2rem;"></p>
+                <div style="text-align: right;">
+                    <a href="guest.html" class="btn btn-primary" id="btnConfirmBook">Book Now</a>
+                </div>
+            </div>
+        </div>
     </main>
+
+    <script src="js/rooms.js"></script>
 </body>
 
 </html>

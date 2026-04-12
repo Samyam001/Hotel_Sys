@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice | Hotel EAD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body style="background-color: #f4f4f5; color: #1f2937;">
+    <header class="navbar" id="main-nav" style="background-color: #0b0f19;">
+        <div class="logo" style="color: white;">HOTEL EAD</div>
+        <nav class="nav-links">
+            <a href="room-status.html" style="color: rgba(255,255,255,0.7);">Dashboard</a>
+            <a href="checkout.html" style="color: rgba(255,255,255,0.7);">Back to Check-out</a>
+        </nav>
+    </header>
+
+    <main class="page-content" style="padding-top: 100px; padding-bottom: 50px;">
+        <div style="text-align: center; margin-bottom: 1rem;">
+            <button class="btn btn-primary" onclick="window.print()">Print Invoice</button>
+            <button class="btn btn-outline" style="border: 1px solid #0b0f19; color: #0b0f19; margin-left: 1rem;" onclick="generatePDF()">Download PDF</button>
+        </div>
+
+        <div class="report-container" id="invoiceReport">
+            <div class="report-header" style="align-items: center;">
+                <div class="brand-section">
+                    <div style="font-family: var(--font-heading); font-size: 1.5rem; letter-spacing: 2px; color: var(--primary-color);">HOTEL EAD</div>
+                    <div style="font-size: 0.85rem; color: #6b7280; margin-top: 5px;">Thamel, Kathmandu, Nepal<br>PAN: 000000000 | +977 1 4XXXXXX</div>
+                </div>
+                <div style="text-align: right;">
+                    <h1 style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 300;">INVOICE</h1>
+                    <div style="font-size: 0.9rem; color: #4b5563;">INV-#20261018-42</div>
+                    <div style="font-size: 0.85rem;">Date: <span id="currentDate"></span></div>
+                    <div>Status: <span class="badge badge-success">PAID</span></div>
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; margin-bottom: 2rem; border-bottom: 1px solid #e5e7eb; padding-bottom: 1.5rem;">
+                <div>
+                    <h4 style="color: #6b7280; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0.5rem;">Billed To:</h4>
+                    <div style="font-weight: 600;">John Doe</div>
+                    <div style="font-size: 0.85rem; color: #4b5563;">john.doe@example.com<br>+977 9812345678</div>
+                </div>
+                <div style="text-align: right;">
+                    <h4 style="color: #6b7280; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0.5rem;">Stay Info:</h4>
+                    <div style="font-weight: 600;">Room 201 (Premium)</div>
+                    <div style="font-size: 0.85rem; color: #4b5563;">Check-In: Oct 15, 2026<br>Check-Out: Oct 18, 2026 (3 Nights)</div>
+                </div>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th style="width: 50%;">Description</th>
+                        <th style="text-align: right;">Quantity</th>
+                        <th style="text-align: right;">Unit Price</th>
+                        <th style="text-align: right;">Amount ($)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Room Charges - Premium Room</td>
+                        <td style="text-align: right;">3</td>
+                        <td style="text-align: right;">150.00</td>
+                        <td style="text-align: right;">450.00</td>
+                    </tr>
+                    <tr>
+                        <td>Room Service (Food & Beverage)</td>
+                        <td style="text-align: right;">1</td>
+                        <td style="text-align: right;">45.00</td>
+                        <td style="text-align: right;">45.00</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="display: flex; justify-content: flex-end; margin-top: 1rem;">
+                <div style="width: 300px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.9rem; color: #4b5563;">
+                        <span>Subtotal</span>
+                        <span>$ 495.00</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.9rem; color: #4b5563;">
+                        <span>VAT (13%)</span>
+                        <span>$ 64.35</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; border-top: 2px solid #e5e7eb; padding-top: 0.5rem; margin-top: 0.5rem; font-size: 1.25rem; font-weight: 700; color: #111827;">
+                        <span>Total Paid</span>
+                        <span>$ 559.35</span>
+                    </div>
+                    <div style="text-align: right; margin-top: 0.5rem; font-size: 0.75rem; color: #6b7280; font-style: italic;">
+                        Payment Method: Credit Card (**** 1234)
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 4rem; font-size: 0.8rem; color: #9ca3af;">
+                <p>Signature:</p>
+                <div style="width: 200px; border-bottom: 1px solid #d1d5db; margin: 1.5rem auto 0.5rem;"></div>
+                <p>Authorized Signatory</p>
+                <p style="margin-top: 2rem;">Thank you for your business.</p>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString();
+        function generatePDF() {
+            var element = document.getElementById('invoiceReport');
+            var opt = {
+              margin:       0.5,
+              filename:     'Invoice_INV-20261018-42.pdf',
+              image:        { type: 'jpeg', quality: 0.98 },
+              html2canvas:  { scale: 2 },
+              jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(element).save();
+        }
+    </script>
+</body>
+</html>

@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel EAD</title>
-    <meta name="description" content="Experience the premium luxury at Hotel EAD. Discover the architecture of silence.">
+    <meta name="description"
+        content="Experience the premium luxury at Hotel EAD. Discover the architecture of silence.">
     <!-- Use Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/home.css">
 </head>
+
 <body>
     <header class="navbar" id="main-nav">
         <div class="logo">HOTEL EAD</div>
@@ -21,8 +26,9 @@
             <a href="about.html">About Us</a>
             <a href="contact.html">Contact Us</a>
         </nav>
-        <div class="nav-actions">
-            <a href="book.html" class="btn btn-primary" id="btn-book-nav">BOOK NOW</a>
+        <div class="nav-actions" style="display: flex; align-items: center;">
+            <a href="login.html" class="btn btn-outline" style="border: 1px solid white; color: white; margin-right: 1rem;">STAFF LOGIN</a>
+            <a href="room.html" class="btn btn-primary">BOOK NOW</a>
         </div>
     </header>
 
@@ -35,22 +41,49 @@
         <div class="booking-widget" id="main-booking-widget">
             <div class="widget-field">
                 <label for="check-in">Check In</label>
-                <input type="text" id="check-in">
+                <input type="date" id="check-in" required>
             </div>
             <div class="divider"></div>
             <div class="widget-field">
                 <label for="check-out">Check Out</label>
-                <input type="text" id="check-out">
+                <input type="date" id="check-out" required>
             </div>
             <div class="divider"></div>
             <div class="widget-field">
                 <label for="guests">GUESTS</label>
-                <input type="text" id="guests">
+                <input type="number" id="guests" min="1" max="6" value="1" oninput="this.value = Math.abs(this.value) > 6 ? 6 : Math.abs(this.value) < 1 ? 1 : Math.abs(this.value)">
             </div>
             <div class="widget-action">
-                <button class="btn btn-primary btn-large" id="btn-search-availability">Search Availability</button>
+                <button class="btn btn-primary btn-large" id="btn-search-availability" onclick="performSearch()">Search Availability</button>
             </div>
         </div>
     </main>
+
+    <script>
+        // Restrict dates to future only
+        const today = new Date().toISOString().split('T')[0];
+        const checkIn = document.getElementById('check-in');
+        const checkOut = document.getElementById('check-out');
+        
+        checkIn.min = today;
+        checkOut.min = today;
+        
+        checkIn.addEventListener('change', function() {
+            checkOut.min = this.value;
+            if (checkOut.value <= this.value) {
+                checkOut.value = '';
+            }
+        });
+
+        function performSearch() {
+            if (!checkIn.value || !checkOut.value) {
+                alert("Please select valid Check-In and Check-Out dates.");
+                return;
+            }
+            // Navigate to room search page
+            window.location.href = 'room.html';
+        }
+    </script>
 </body>
+
 </html>

@@ -1,0 +1,240 @@
+/* forms.css - Premium Form & Report Styles */
+
+/* Form Layout Container */
+.form-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 5rem auto 3rem;
+    padding: 2.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+    animation: fadeIn 0.5s ease-out;
+}
+
+.form-full-width {
+    max-width: 900px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.form-header .subtitle {
+    margin-bottom: 0.5rem;
+}
+
+.form-header h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 300;
+}
+
+/* Form Groups & Inputs */
+.form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    color: var(--text-light);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: all var(--transition-fast);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+select.form-control > option {
+    background: #0b0f19;
+    color: white;
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Validation Messages */
+.error-msg {
+    color: #ff4d4f;
+    font-size: 0.75rem;
+    margin-top: 0.4rem;
+    display: none; /* hidden by default */
+}
+
+.is-invalid {
+    border-color: #ff4d4f !important;
+    background: rgba(255, 77, 79, 0.05) !important;
+}
+
+/* Form Actions */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    gap: 1rem;
+}
+
+/* Flex Grid for forms */
+.form-row {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.form-col {
+    flex: 1;
+}
+
+@media (max-width: 600px) {
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
+/* Report Styles */
+.report-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 6rem auto 3rem;
+    padding: 3rem;
+    background: #ffffff;
+    color: #1f2937;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+/* Dark mode report (for Dashboards) */
+.report-container.dark {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(25px);
+    color: var(--text-light);
+    border: 1px solid var(--glass-border);
+}
+
+.report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.report-container.dark .report-header {
+    border-bottom: 2px solid var(--glass-border);
+}
+
+.brand-section h1 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    margin-bottom: 0.2rem;
+}
+
+.report-meta {
+    text-align: right;
+    font-size: 0.9rem;
+    color: #4b5563;
+}
+
+.report-container.dark .report-meta {
+    color: var(--text-muted);
+}
+
+/* Tables */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+}
+
+.data-table th, .data-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.report-container.dark .data-table th, 
+.report-container.dark .data-table td {
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.data-table th {
+    background: #f9fafb;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    color: #6b7280;
+}
+
+.report-container.dark .data-table th {
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-muted);
+}
+
+/* Status Badges */
+.badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.badge-success { background: #dcfce7; color: #166534; }
+.badge-warning { background: #fef08a; color: #854d0e; }
+.badge-danger { background: #fee2e2; color: #991b1b; }
+.badge-info { background: #e0f2fe; color: #075985; }
+
+.report-container.dark .badge-success { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
+.report-container.dark .badge-warning { background: rgba(234, 179, 8, 0.2); color: #facc15; }
+.report-container.dark .badge-danger { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+.report-container.dark .badge-info { background: rgba(56, 189, 248, 0.2); color: #7dd3fc; }
+
+/* Totals */
+.report-total {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+}
+
+/* Print Overrides */
+@media print {
+    body { background: white; -webkit-print-color-adjust: exact; }
+    .navbar, .btn { display: none !important; }
+    .report-container { box-shadow: none; margin: 0; padding: 0; max-width: 100%; border: none; }
+}

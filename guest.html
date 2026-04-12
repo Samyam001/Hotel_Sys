@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest Booking | Hotel EAD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/forms.css">
+</head>
+<body>
+    <header class="navbar" id="main-nav">
+        <div class="logo">HOTEL EAD</div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="room.html">Rooms</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact Us</a>
+        </nav>
+        <div class="nav-actions" style="display: flex; align-items: center;">
+            <a href="login.html" class="btn btn-outline" style="border: 1px solid white; color: white;">STAFF LOGIN</a>
+        </div>
+    </header>
+
+    <main class="page-content" style="padding-top: 100px; padding-bottom: 50px;">
+        <div class="form-container form-full-width">
+            <div class="form-header">
+                <span class="subtitle" style="display: block; font-family: var(--font-body); font-size: 0.85rem; letter-spacing: 4px; text-transform: uppercase;">Reservation</span>
+                <h2>Guest Booking Form</h2>
+            </div>
+
+            <form id="bookingForm" novalidate>
+                <!-- Section: Guest Details -->
+                <h3 style="margin-bottom: 1rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 0.5rem;">1. Guest Information</h3>
+                
+                <div class="form-row">
+                    <div class="form-group form-col">
+                        <label for="fname">First Name *</label>
+                        <input type="text" id="fname" class="form-control" placeholder="John" required>
+                        <span class="error-msg" id="e-fname">First name is required.</span>
+                    </div>
+                    <div class="form-group form-col">
+                        <label for="lname">Last Name *</label>
+                        <input type="text" id="lname" class="form-control" placeholder="Doe" required>
+                        <span class="error-msg" id="e-lname">Last name is required.</span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group form-col">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" class="form-control" placeholder="guest@example.com" required>
+                        <span class="error-msg" id="e-email">Valid email is required.</span>
+                    </div>
+                    <div class="form-group form-col">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" class="form-control" placeholder="+977 98XXXXXXXX" required>
+                        <span class="error-msg" id="e-phone">Valid phone number is required.</span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group form-col">
+                        <label for="idNum">ID / Passport Number *</label>
+                        <input type="text" id="idNum" class="form-control" placeholder="Document Number" required>
+                        <span class="error-msg" id="e-idNum">ID Number is required.</span>
+                    </div>
+                    <div class="form-group form-col">
+                        <label for="nationality">Nationality</label>
+                        <select id="nationality" class="form-control">
+                            <option value="">Select Nationality</option>
+                            <option value="Nepali">Nepali</option>
+                            <option value="Indian">Indian</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Section: Reservation Details -->
+                <h3 style="margin-top: 2rem; margin-bottom: 1rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 0.5rem;">2. Stay Details</h3>
+                
+                <div class="form-row">
+                    <div class="form-group form-col">
+                        <label for="roomType">Room Type *</label>
+                        <select id="roomType" class="form-control" required>
+                            <option value="">Select Room</option>
+                            <option value="Standard">Standard Room</option>
+                            <option value="Deluxe">Deluxe Room</option>
+                            <option value="Premium">Premium Room</option>
+                            <option value="Suite">Suite Room</option>
+                        </select>
+                        <span class="error-msg" id="e-roomType">Please select a room type.</span>
+                    </div>
+                    <div class="form-group form-col">
+                        <label for="guests">Number of Guests *</label>
+                        <input type="number" id="guests" class="form-control" min="1" max="4" value="1" required>
+                        <span class="error-msg" id="e-guests">Must be between 1 and 4.</span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group form-col">
+                        <label for="checkin">Check-In Date *</label>
+                        <input type="date" id="checkin" class="form-control" required>
+                        <span class="error-msg" id="e-checkin">Valid check-in date required.</span>
+                    </div>
+                    <div class="form-group form-col">
+                        <label for="checkout">Check-Out Date *</label>
+                        <input type="date" id="checkout" class="form-control" required>
+                        <span class="error-msg" id="e-checkout">Must be after check-in date.</span>
+                    </div>
+                </div>
+
+                <!-- Section: Payment Details -->
+                <h3 style="margin-top: 2rem; margin-bottom: 1rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 0.5rem;">3. Payment Info</h3>
+                
+                <div class="form-row">
+                    <div class="form-group form-col">
+                        <label for="payMethod">Payment Method *</label>
+                        <select id="payMethod" class="form-control" required>
+                            <option value="">Select Method</option>
+                            <option value="Card">Credit/Debit Card</option>
+                            <option value="eSewa">eSewa</option>
+                            <option value="Cash">Cash (Upon Arrival)</option>
+                        </select>
+                        <span class="error-msg" id="e-payMethod">Select a payment method.</span>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" style="background: transparent; color: white; border: 1px solid white;" onclick="document.getElementById('bookingForm').reset();">Reset Form</button>
+                    <button type="submit" class="btn btn-primary btn-large" style="width: auto;">Confirm Booking</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        // Set min dates
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('checkin').min = today;
+        document.getElementById('checkout').min = today;
+        
+        document.getElementById('checkin').addEventListener('change', function() {
+            document.getElementById('checkout').min = this.value;
+        });
+
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate Form
+            const fields = ['fname', 'lname', 'email', 'phone', 'idNum', 'roomType', 'guests', 'checkin', 'checkout', 'payMethod'];
+            let isValid = true;
+
+            fields.forEach(f => {
+                const el = document.getElementById(f);
+                const err = document.getElementById('e-' + f);
+                
+                el.classList.remove('is-invalid');
+                err.style.display = 'none';
+                
+                if (!el.value) {
+                    el.classList.add('is-invalid');
+                    err.style.display = 'block';
+                    isValid = false;
+                }
+            });
+
+            // Specific validations
+            const email = document.getElementById('email');
+            if (email.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+                email.classList.add('is-invalid');
+                document.getElementById('e-email').style.display = 'block';
+                isValid = false;
+            }
+
+            const guests = document.getElementById('guests');
+            if (guests.value && (guests.value < 1 || guests.value > 4)) {
+                guests.classList.add('is-invalid');
+                document.getElementById('e-guests').style.display = 'block';
+                isValid = false;
+            }
+
+            const checkin = document.getElementById('checkin').value;
+            const checkout = document.getElementById('checkout').value;
+            if (checkin && checkout && checkout <= checkin) {
+                document.getElementById('checkout').classList.add('is-invalid');
+                document.getElementById('e-checkout').style.display = 'block';
+                isValid = false;
+            }
+
+            if (isValid) {
+                // Save data to session storage for confirmation page
+                const fName = document.getElementById('fname').value;
+                const lName = document.getElementById('lname').value;
+                const userEmail = email.value;
+                const userPhone = document.getElementById('phone').value;
+                const roomTypeVal = document.getElementById('roomType').value;
+                const guestsVal = guests.value;
+                
+                sessionStorage.setItem('booking_fname', fName);
+                sessionStorage.setItem('booking_lname', lName);
+                sessionStorage.setItem('booking_email', userEmail);
+                sessionStorage.setItem('booking_phone', userPhone);
+                sessionStorage.setItem('booking_room', roomTypeVal);
+                sessionStorage.setItem('booking_guests', guestsVal);
+                sessionStorage.setItem('booking_checkin', checkin);
+                sessionStorage.setItem('booking_checkout', checkout);
+                
+                const btn = document.querySelector('button[type="submit"]');
+                const orig = btn.textContent;
+                btn.textContent = "Processing...";
+                btn.disabled = true;
+                
+                setTimeout(() => {
+                    alert("Booking successfully recorded!");
+                    window.location.href = "confirmation.html";
+                }, 1500);
+            }
+        });
+    </script>
+</body>
+</html>
